@@ -16,11 +16,11 @@ Adicione o arquivo .prettierrc no root do app
 
 ```
 {
- “printWidth”: 100,
- “trailingComma”: “all”,
- “tabWidth”: 2,
- “semi”: true,
- “singleQuote”: true
+ "printWidth": 100,
+ "trailingComma": "all",
+ "tabWidth": 2,
+ "semi": true,
+ "singleQuote": true
 }
 ```
 
@@ -102,8 +102,8 @@ No VSCode, dê um Ctrl + P: `ext install esbenp.prettier-vscode` (só é necess�
 Code > Preferences > settings
 
 ```
-“editor.formatOnSave”: true,
-“eslint.autoFixOnSave”: true
+"editor.formatOnSave": true,
+"eslint.autoFixOnSave": true
 ```
 
 Aqui no novo VSCode é um pouco diferente. Basta procurar na barra de buscadentro do settings pelo nome editor.formatOnSave q acha.
@@ -115,12 +115,12 @@ Aqui no novo VSCode é um pouco diferente. Basta procurar na barra de buscadentr
 ### No package.json
 
 ```
-“husky”: {
-    “hooks”: {
-        “pre-commit”: “lint-staged”
+"husky": {
+    "hooks": {
+        "pre-commit": "lint-staged"
     }
 },
-“lint-staged”: {
-    “src/**/*.{js,jsx}”: [“eslint”, “pretty-quick — staged”, “git add”]
+"lint-staged": {
+    "src/**/*.{js,jsx}": ["eslint", "pretty-quick — staged", "git add"]
 },
 ```
