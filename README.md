@@ -1,68 +1,126 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Prettier + ESLint
 
-## Available Scripts
+Fonte: https://medium.com/dubizzletechblog/setting-up-prettier-and-eslint-for-js-and-react-apps-bbc779d29062
 
-In the project directory, you can run:
+## Instale as libs
 
-### `npm start`
+Com npm:
+`npm install --save-dev babel-eslint eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-react eslint-plugin-import prettier pretty-quick`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Com yarn:
+`yarn add -D babel-eslint eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-react eslint-plugin-import prettier pretty-quick`
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## .prettierrc
 
-### `npm test`
+Adicione o arquivo .prettierrc no root do app
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+{
+ “printWidth”: 100,
+ “trailingComma”: “all”,
+ “tabWidth”: 2,
+ “semi”: true,
+ “singleQuote”: true
+}
+```
 
-### `npm run build`
+## .eslintrc
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Adicione o arquivo .eslintrc no root do app
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+```
+{
+    "parser": "babel-eslint",
+    "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": false,
+    "codeFrame": false
+},
+"extends": ["airbnb", "prettier"],
+"env": {
+    "browser": true,
+    "jest": true
+},
+"rules": {
+    "max-len": ["error", {"code": 100}],
+    "prefer-promise-reject-errors": ["off"],
+    "react/jsx-filename-extension": ["off"],
+    "react/prop-types": ["warn"],
+    "no-return-assign": ["off"]
+  }
+}
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## .eslintignore
 
-### `npm run eject`
+Adicione o arquivo .eslintignore no root do app
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+src/serviceWorker.js
+node_modules/*
+public/*
+build/*
+config/*
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Configurando o VSCode
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### .editorconfig
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+No VSCode, dê um Ctrl + P: `ext install EditorConfig.EditorConfig` (só é necessário na primeira vez)
 
-## Learn More
+Adicione o arquivo .editorconfig no root do app
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+# http://editorconfig.org
+root = true
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+max_line_length = 100
+trim_trailing_whitespace = true
+[*.md]
+max_line_length = 0
+trim_trailing_whitespace = false
+[{Makefile,**.mk}]
+# Use tabs for indentation (Makefiles require tabs)
+indent_style = tab
+[*.scss]
+indent_size = 2
+indent_style = space
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Extensão do Prettier no VSCode
 
-### Code Splitting
+No VSCode, dê um Ctrl + P: `ext install esbenp.prettier-vscode` (só é necessário na primeira vez)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+### Nas configurações do VSCode
 
-### Analyzing the Bundle Size
+Code > Preferences > settings
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+```
+“editor.formatOnSave”: true,
+“eslint.autoFixOnSave”: true
+```
 
-### Making a Progressive Web App
+Aqui no novo VSCode é um pouco diferente. Basta procurar na barra de buscadentro do settings pelo nome editor.formatOnSave q acha.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+## Formatando o pré-commit
 
-### Advanced Configuration
+`npm install --save-dev lint-staged husky`
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+### No package.json
 
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```
+“husky”: {
+    “hooks”: {
+        “pre-commit”: “lint-staged”
+    }
+},
+“lint-staged”: {
+    “src/**/*.{js,jsx}”: [“eslint”, “pretty-quick — staged”, “git add”]
+},
+```
