@@ -5,7 +5,7 @@ Fonte: https://medium.com/dubizzletechblog/setting-up-prettier-and-eslint-for-js
 ## Instale as libs
 
 Com npm:
-`npm install --save-dev babel-eslint eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-react eslint-plugin-import prettier pretty-quick`
+`npm install --save-dev eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-react eslint-plugin-import prettier pretty-quick`
 
 Com yarn:
 `yarn add -D eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-react eslint-plugin-import prettier pretty-quick`
