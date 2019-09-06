@@ -2,6 +2,8 @@
 
 Fonte: https://medium.com/dubizzletechblog/setting-up-prettier-and-eslint-for-js-and-react-apps-bbc779d29062
 
+(modificado. babel-eslint dá cachorro pq o CRA agora vem com esta lib)
+
 ## Instale as libs
 
 Com npm:
@@ -30,7 +32,6 @@ Adicione o arquivo .eslintrc no root do app
 
 ```
 {
-    "parser": "babel-eslint",
     "parserOptions": {
     "sourceType": "module",
     "allowImportExportEverywhere": false,
